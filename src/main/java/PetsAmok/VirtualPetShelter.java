@@ -5,7 +5,7 @@ import java.util.*;
 import static PetsAmok.UserInputStaticMethods.exitGame;
 
 public class VirtualPetShelter {
-    HashMap<String, VirtualPet> pets = new HashMap<>();
+    ArrayList<VirtualPet> pets = new ArrayList<>();
     private int litterBoxLevel;
 
     public VirtualPetShelter() {
@@ -13,7 +13,7 @@ public class VirtualPetShelter {
     }
 
     public void addPet(VirtualPet newPet) {
-        pets.put(newPet.getName(), newPet);
+        pets.add(newPet);
     }
 
     public int getLitterBoxLevel() {
@@ -22,7 +22,7 @@ public class VirtualPetShelter {
 
     public void emptyLitterBox() {
         litterBoxLevel -= 20;
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof OrganicCat) {
                 pet.healthLevel += 3;
                 pet.happinessLevel += 2;
@@ -31,7 +31,7 @@ public class VirtualPetShelter {
     }
 
     public void cleanAllCages() {
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof OrganicDog) {
                 ((OrganicDog) pet).cleanCage();
             }
@@ -41,7 +41,7 @@ public class VirtualPetShelter {
     public void tick() {
         litterBoxLevel += 5;
 
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof RoboticPet) {
                 if (pet.age > 5) {
                     ((RoboticPet) pet).oilThirst += 2;
@@ -60,7 +60,7 @@ public class VirtualPetShelter {
 
     public int totalHealthOfPets() {
         int sum = 0;
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             sum += pet.healthLevel;
         }
         return sum;
@@ -72,7 +72,7 @@ public class VirtualPetShelter {
     }
 
     public void oilRoboticDogs(int oilAmount) {
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof RoboticDog) {
                 ((RoboticPet) pet).giveOil(oilAmount);
             }
@@ -80,7 +80,7 @@ public class VirtualPetShelter {
     }
 
     public void oilRoboticCats(int oilAmount) {
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof RoboticCat) {
                 ((RoboticPet) pet).giveOil(oilAmount);
             }
@@ -93,7 +93,7 @@ public class VirtualPetShelter {
     }
 
     public void feedDogs(int amountOfFood) {
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof OrganicDog) {
                 ((OrganicPet) pet).feedPet(amountOfFood);
             }
@@ -101,7 +101,7 @@ public class VirtualPetShelter {
     }
 
     public void feedCats(int amountOfFood) {
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof OrganicCat) {
                 ((OrganicPet) pet).feedPet(amountOfFood);
             }
@@ -110,13 +110,13 @@ public class VirtualPetShelter {
 
     public void walkDogs(String dogType) {
         if (dogType.equals("RobotDog")) {
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof RoboticDog) {
                     ((Dog) pet).walkDog();
                 }
             }
         } else if (dogType.equals("OrganicDog")) {
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof OrganicDog) {
                     ((Dog) pet).walkDog();
                 }
@@ -129,13 +129,13 @@ public class VirtualPetShelter {
 
     public void playCatch(String dogType) {
         if (dogType.equals("RobotDog")) {
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof RoboticDog) {
                     ((Dog) pet).playCatch();
                 }
             }
         } else if (dogType.equals("OrganicDog")) {
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof OrganicDog) {
                     ((Dog) pet).playCatch();
                 }
@@ -147,7 +147,7 @@ public class VirtualPetShelter {
     }
 
     public void waterDogs(int servingsOfWater) {
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof OrganicDog) {
                 ((OrganicDog) pet).waterPet(servingsOfWater);
             }
@@ -155,7 +155,7 @@ public class VirtualPetShelter {
     }
 
     public void waterCats(int servingsOfWater) {
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof OrganicCat) {
                 ((OrganicCat) pet).waterPet(servingsOfWater);
             }
@@ -170,7 +170,7 @@ public class VirtualPetShelter {
 
     public void chaseDogs(String catType) {
         if (catType.equals("OrganicCat")) {
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof OrganicCat) {
                     ((OrganicCat) pet).happinessLevel += 10;
                     ((OrganicCat) pet).thirst += 5;
@@ -178,7 +178,7 @@ public class VirtualPetShelter {
                 }
             }
         } else if (catType.equals("RoboticCat")) {
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof RoboticCat) {
                     pet.happinessLevel += 10;
                     ((RoboticCat) pet).oilThirst += 7;
@@ -191,7 +191,7 @@ public class VirtualPetShelter {
     }
 
     public void dogsChased() {
-        for (VirtualPet pet : pets.values()) {
+        for (VirtualPet pet : pets) {
             if (pet instanceof OrganicDog) {
                 pet.happinessLevel -= 5;
             }
@@ -201,7 +201,7 @@ public class VirtualPetShelter {
 
     public void huntMice(String catType) {
         if (catType.equals("OrganicCat")) {
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof OrganicCat) {
                     ((OrganicCat) pet).thirst += 5;
                     ((OrganicCat) pet).hunger -= 5;
@@ -209,7 +209,7 @@ public class VirtualPetShelter {
                 }
             }
         } else if (catType.equals("RoboticCat")) {
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof RoboticCat) {
                     pet.happinessLevel += 8;
                     ((RoboticCat) pet).oilThirst += 10;
@@ -266,7 +266,7 @@ public class VirtualPetShelter {
         } else if (choice.equals("robotic dogs")) {
             System.out.println("The Robotic dogs...");
             System.out.println("Name      Health Level   Oil-need   Age");
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof RoboticDog) {
                     System.out.println(pet.toString());
                 }
@@ -275,7 +275,7 @@ public class VirtualPetShelter {
         } else if (choice.equals("organic dogs")) {
             System.out.println("Organic dogs...");
             System.out.println("Name      Health Level     Hunger     Thirst     Age   CageMess");
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof OrganicDog) {
                     System.out.println(pet.toString());
                 }
@@ -284,7 +284,7 @@ public class VirtualPetShelter {
         } else if (choice.equals("robotic cats")) {
             System.out.println("The Robotic cats...");
             System.out.println("Name      Health Level   Oil-need   Age");
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof RoboticCat) {
                     System.out.println(pet.toString());
                 }
@@ -293,21 +293,16 @@ public class VirtualPetShelter {
         } else if (choice.equals("organic cats")) {
             System.out.println("The Organic cats...");
             System.out.println("Name      Health Level     Hunger     Thirst    Age");
-            for (VirtualPet pet : pets.values()) {
+            for (VirtualPet pet : pets) {
                 if (pet instanceof OrganicCat) {
                     System.out.println(pet.toString());
                 }
             }
             System.out.println();
         } else if (choice.equals("health")) {
-            ArrayList<VirtualPet> ourPets = new ArrayList<>();
-            for (VirtualPet pet : pets.values()) {
-                pet.assessHealth();
-                ourPets.add(pet);
-            }
-            Collections.sort(ourPets);
+            Collections.sort(pets);
             System.out.println(" Name          Health\n");
-            for (VirtualPet pet : ourPets) {
+            for (VirtualPet pet : pets) {
                 System.out.printf("%-12s %d", pet.getName(), pet.getHealthLevel());
                 System.out.println();
             }

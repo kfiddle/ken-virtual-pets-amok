@@ -1,8 +1,6 @@
 package PetsAmok;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 import static PetsAmok.UserInputStaticMethods.*;
@@ -22,24 +20,20 @@ public class VirtualPetShelterApp {
 
     void setup() {
         ArrayList<VirtualPet> petsToAdd = new ArrayList<VirtualPet>();
-
-        petsToAdd.add(new OrganicDog("max", 1, 44, 30, 5));
-        petsToAdd.add(new RoboticDog("samuel", 12, 38, 12));
-        petsToAdd.add(new RoboticCat("robocat", 13, 25, 11));
-        petsToAdd.add(new OrganicDog("wimbley", 1, 40, 20, 5));
-        petsToAdd.add(new OrganicCat("dogkiller", 8, 60, 20, 12));
-        petsToAdd.add(new OrganicDog("linus", 9, 40, 5, 15));
-        petsToAdd.add(new RoboticCat("isabelle", 2, 20, 17));
-        petsToAdd.add(new RoboticDog("jack", 5, 12, 10));
-        petsToAdd.add(new OrganicCat("gracie", 16, 55, 17, 8));
-        petsToAdd.add(new RoboticCat("sophieCita", 12, 17, 9));
-
-        for (VirtualPet pet : petsToAdd) {
-            shelter.pets.put(pet.getName(), pet);
-        }
+        shelter.pets.add(new OrganicDog("max", 1, 44, 30, 5));
+        shelter.pets.add(new RoboticDog("samuel", 12, 38, 12));
+        shelter.pets.add(new RoboticCat("robocat", 13, 25, 11));
+        shelter.pets.add(new OrganicDog("wimbley", 1, 40, 20, 5));
+        shelter.pets.add(new OrganicCat("dogkiller", 8, 60, 20, 12));
+        shelter.pets.add(new OrganicDog("linus", 9, 40, 5, 15));
+        shelter.pets.add(new RoboticCat("isabelle", 2, 20, 17));
+        shelter.pets.add(new RoboticDog("jack", 5, 12, 10));
+        shelter.pets.add(new OrganicCat("gracie", 16, 55, 17, 8));
+        shelter.pets.add(new RoboticCat("sophieCita", 12, 17, 9));
     }
 
-    void intro() {
+
+    void playGame() {
         System.out.println("Welcome. Your job for the day will be to prevent our pet shelter from being over-run. To begin,\n" +
                 "I'll need your name please.");
         String preName = answer.nextLine();
@@ -81,7 +75,7 @@ public class VirtualPetShelterApp {
 
             } else {
                 shelter.display(reply);
-                System.out.println("Would you like to narrow down to a smaller group, take some action? 'act', or 'narrow'");
+                System.out.println("Would you like to narrow down to a smaller group, or take some action? 'act', or 'narrow'");
                 String[] actionType = {"act", "narrow"};
                 String newAnswer = shelter.verifiedOption(actionType);
 
@@ -196,14 +190,14 @@ public class VirtualPetShelterApp {
         if (!twoOptionVerify("yes", "no")) {
             exitGame();
         }
-        int totalHealth = shelter.totalHealthOfPets();
+        int totalHealthOfPets = shelter.totalHealthOfPets();
 
-        if (totalHealth > 100) {
-            System.out.println("These pets are suffering...it's just not your day.");
-        } else if (totalHealth > 85) {
-            System.out.println("You're doing ok. This could have been worse.");
-        } else if (totalHealth > 0) {
+        if (totalHealthOfPets > 100) {
             System.out.println("Well done today!");
+        } else if (totalHealthOfPets > 85) {
+            System.out.println("You're doing ok. This could have been worse.");
+        } else if (totalHealthOfPets > 0) {
+            System.out.println("These pets are suffering...it's just not your day.");
         }
     }
 
@@ -214,7 +208,7 @@ public class VirtualPetShelterApp {
             int quarts = validInteger(10);
             shelter.oilAllRobots(quarts);
         } else if (action.equals("feed")) {
-            System.out.println("How many serving for all of your organic pets?");
+            System.out.println("How many servings for all of your organic pets?");
             int servings = validInteger(10);
             shelter.feedAllPets(servings);
         } else if (action.equals("water")) {
@@ -239,7 +233,7 @@ public class VirtualPetShelterApp {
     public static void main(String[] args) {
         VirtualPetShelterApp game = new VirtualPetShelterApp();
         game.setup();
-        game.intro();
+        game.playGame();
     }
 }
 
